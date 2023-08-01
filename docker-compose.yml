@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  project:
+    image: 'nginx:alpine'
+    container_name: nginx
+    working_dir: /var/www/html
+    volumes:
+      - './src:/var/www/html'
+      - './nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+    ports:
+      - '8088:80'
+    networks:
+      - minor
+    depends_on:
+      - minor-fpm
+
+  minor-fpm:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: minor-fpm
+    volumes:
+      - './src:/var/www/html'
+    networks:
+      - minor
+
+networks:
+  minor:
+    external: true
