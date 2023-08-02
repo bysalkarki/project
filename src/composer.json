@@ -1,18 +1,15 @@
 {
-    "name": "root/html",
-    "description": "minor project",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "App\\": "./src"
-        }
-    },
-    "authors": [
-        {
-            "name": "bishal karki"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {}
+  "name": "bishalkarki/minor-project",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "app\\": "./"
+    }
+  },
+  "authors": [
+    {
+      "name": "bishal karki"
+    }
+  ],
+  "require": {}
 }
