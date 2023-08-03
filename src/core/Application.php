@@ -5,17 +5,20 @@ namespace app\core;
 class Application
 {
     public static string $ROOT_DIR;
-
+    public static Application $app;
     public Router $router;
     public Session $session;
     public Request $request;
+    public Response $response;
 
     public function __construct($rootPath)
     {
         self::$ROOT_DIR = $rootPath;
         $this->session = new Session();
         $this->request = new Request();
-        $this->router = new Router($this->request);
+        $this->response = new Response();
+        $this->router = new Router($this->request, $this->response);
+        self::$app = $this;
     }
 
     public function run()

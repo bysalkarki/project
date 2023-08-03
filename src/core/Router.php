@@ -5,20 +5,22 @@ namespace app\core;
 class Router
 {
     public Request $request;
+    public Response $response;
 
     protected array $routes = [];
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
 
-    public function get(string $path, string|callable $callback): void
+    public function get(string $path, string|callable|array $callback): void
     {
         $this->routes['get'][$path] = $callback;
     }
 
-    public function post(string $path, string|callable $callback): void
+    public function post(string $path, string|callable|array $callback): void
     {
         $this->routes['post'][$path] = $callback;
     }
@@ -29,39 +31,56 @@ class Router
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
         if (!$callback) {
-            return 'NOT FOUND';
+            $this->response->setStatusCode('404');
+            return $this->renderContent('NOT FOUND');
         }
 
         if (is_string($callback)) {
-            $this->renderView($callback);
-            exit;
+            return $this->renderView($callback);
+        }
+
+        if (is_array($callback)) {
+            $callback[0] = new $callback[0]();
         }
 
         return call_user_func($callback);
     }
 
     /**
-     * @param string $view
-     * @return array|bool|string
+     * @param string $content
+     * @return string
      */
-    private function renderView(string $view): array|bool|string
+    private function renderContent(string $content): string
     {
         $layout = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view);
-        return str_replace("{{content}}", $viewContent, $layout);
+        return str_replace("{{content}}", $content, $layout);
     }
 
     protected function layoutContent(): bool|string
     {
         ob_start();
-        include_once Application::$ROOT_DIR . "/../views/layouts/main.php";
+        include_once Application::$ROOT_DIR . "/views/layouts/main.php";
         return ob_get_clean();
     }
 
-    protected function renderOnlyView($view)
+    /**
+     * @param string $view
+     * @return string
+     */
+    public function renderView(string $view, array $params = []): string
     {
+        $layout = $this->layoutContent();
+        $viewContent = $this->renderOnlyView($view, $params);
+        return str_replace("{{content}}", $viewContent, $layout);
+    }
+
+    protected function renderOnlyView($view, array $params): bool|string
+    {
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
         ob_start();
-        include_once Application::$ROOT_DIR . "/../views/{$view}.php";
+        include_once Application::$ROOT_DIR . "/views/{$view}.php";
         return ob_get_clean();
     }
 }
