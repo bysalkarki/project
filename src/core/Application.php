@@ -10,6 +10,7 @@ class Application
     public Session $session;
     public Request $request;
     public Response $response;
+    public Controller $controller;
 
     public function __construct($rootPath)
     {
@@ -25,4 +26,16 @@ class Application
     {
         echo $this->router->resolve();
     }
+
+
+    public function getController(): Controller
+    {
+        return $this->controller;
+    }
+
+    public function setController(Controller $controller): void
+    {
+        $this->controller = $controller;
+    }
+
 }
