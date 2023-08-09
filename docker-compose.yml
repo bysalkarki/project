@@ -25,6 +25,24 @@ services:
     networks:
       - minor
 
+  mysql:
+    image: mysql:latest
+    ports:
+      - '3306:3306'
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: 'employee'
+      MYSQL_PASSWORD: 'employee'
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER: 'employee'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
+
 networks:
   minor:
     external: true

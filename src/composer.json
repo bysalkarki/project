@@ -11,5 +11,7 @@
       "name": "bishal karki"
     }
   ],
-  "require": {}
+  "require": {
+    "ext-pdo": "*"
+  }
 }
