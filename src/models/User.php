@@ -6,13 +6,18 @@ use app\core\DbModel;
 
 class User extends DbModel
 {
-    public string $name;
-    public string $email;
-    public string $password;
-    public string $passwordConfirmation;
+    public const STATUS_ACTIVE = 1;
+    public const STATUS_INACTIVE = 0;
+    public const STATUS_DELETED = 2;
+    public string $name = '';
+    public string $email = '';
+    public string $password = '';
+    public string $passwordConfirmation = '';
+    public int $status = self::STATUS_INACTIVE;
 
     public function register()
     {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         $this->save();
     }
 
@@ -37,7 +42,8 @@ class User extends DbModel
         return [
             'name',
             'email',
-            'password'
+            'password',
+            'status',
         ];
     }
 }
