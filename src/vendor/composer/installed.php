@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'root/html',
+        'name' => 'bishalkarki/minor-project',
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
         'reference' => NULL,
@@ -10,7 +10,7 @@
         'dev' => true,
     ),
     'versions' => array(
-        'root/html' => array(
+        'bishalkarki/minor-project' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
             'reference' => NULL,
