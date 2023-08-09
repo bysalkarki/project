@@ -26,19 +26,20 @@ services:
       - minor
 
   mysql:
-    image: mysql:latest
+    image: mysql
     ports:
       - '3306:3306'
     restart: on-failure
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_DATABASE: 'employee'
       MYSQL_PASSWORD: 'employee'
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_USER: 'employee'
-    expose:
-      - '3306'
     volumes:
       - my-db:/var/lib/mysql
+    networks:
+      - minor
 
 volumes:
   my-db:
