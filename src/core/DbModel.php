@@ -33,7 +33,12 @@ abstract class DbModel extends Model
 
     public function labels(): array
     {
+        return [];
+    }
 
+    public function getLabel($attribute): string
+    {
+        return $this->labels()[$attribute] ?? $attribute;
     }
 
     public static function prepare($sql): bool|PDOStatement
