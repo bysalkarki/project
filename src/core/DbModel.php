@@ -2,7 +2,6 @@
 
 namespace app\core;
 
-use app\core\Model;
 use Exception;
 use PDOStatement;
 
@@ -11,11 +10,11 @@ abstract class DbModel extends Model
     public function save(): bool
     {
         try {
-            $tableName  = $this->tableName();
+            $tableName = $this->tableName();
             $attributes = implode(',', $this->attributes());
-            $params     = implode(',', array_map(fn($m) => ":$m", $attributes));
-            $sql        = "INSERT INTO $tableName ($attributes) VALUES ($params)";
-            $statement  = self::prepare($sql);
+            $params = implode(',', array_map(fn($m) => ":$m", $attributes));
+            $sql = "INSERT INTO $tableName ($attributes) VALUES ($params)";
+            $statement = self::prepare($sql);
 
             foreach ($this->attributes() as $attribute) {
                 $statement->bindValue(":$attribute", $this->{$attribute});
@@ -31,6 +30,11 @@ abstract class DbModel extends Model
     abstract public function tableName(): string;
 
     abstract public function attributes(): array;
+
+    public function labels(): array
+    {
+
+    }
 
     public static function prepare($sql): bool|PDOStatement
     {

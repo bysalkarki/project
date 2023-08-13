@@ -1,7 +1,34 @@
 <?php
 
 ?>
-<html>
+<html lang="en">
+<style>
+    /* Custom styles for the hero banner */
+    .hero-banner {
+        background-image: url("https://source.unsplash.com/H4EyvkuBhHA");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        padding: 150px 0;
+        text-align: center;
+    }
+
+    .hero-banner h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-banner p {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    .btn-primary {
+        background-color: #FF5733;
+        border-color: #FF5733;
+    }
+</style>
+</head>
 <header class="p-3 text-bg-dark">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
