@@ -1,6 +1,6 @@
 # Employee Management System (PHP & MySQL)
 
-![Project Logo](./images/logo.png)
+![Project Logo](./img.png)
 
 ## Table of Contents
 
@@ -35,19 +35,14 @@ Follow these instructions to set up the Employee Management System on your local
 
 ### Prerequisites
 
-- Web server (e.g., Apache)
-- PHP (version 7.4 or higher)
-- MySQL database (running instance)
-- Composer (for installing dependencies)
+- Docker
+
 
 ### Installation
 
 1. Clone the repository: `git clone https://github.com/yourusername/employee-management-system.git`
 2. Navigate to the project directory: `cd employee-management-system`
-3. Install dependencies: `composer install`
-4. Import the provided SQL file into your MySQL database to set up the schema and sample data.
-5. Configure the database connection in `config/database.php`.
-6. Start your web server and access the application through a web browser.
+3. docker create network minor && docker compose up -d 
 
 ## Usage
 
