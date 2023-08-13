@@ -11,5 +11,8 @@
       "name": "bishal karki"
     }
   ],
-  "require": {}
+  "require": {
+    "ext-pdo": "*",
+    "vlucas/phpdotenv": "^5.5"
+  }
 }

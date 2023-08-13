@@ -11,15 +11,17 @@ class Application
     public Request $request;
     public Response $response;
     public Controller $controller;
+    public Database $db;
 
-    public function __construct($rootPath)
+    public function __construct($rootPath, array $config)
     {
         self::$ROOT_DIR = $rootPath;
-        $this->session = new Session();
-        $this->request = new Request();
+        $this->session  = new Session();
+        $this->request  = new Request();
         $this->response = new Response();
-        $this->router = new Router($this->request, $this->response);
-        self::$app = $this;
+        $this->router   = new Router($this->request, $this->response);
+        self::$app      = $this;
+        $this->db       = new Database($config['db']);
     }
 
     public function run()
@@ -37,5 +39,7 @@ class Application
     {
         $this->controller = $controller;
     }
+
+
 
 }

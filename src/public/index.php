@@ -6,7 +6,22 @@ use app\controllers\AuthController;
 use app\controllers\SiteController;
 use app\core\Application;
 
-$app = new Application(dirname(__DIR__));
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+$config = [
+    'db' => [
+        'user'     => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD'],
+        'host'     => $_ENV['DB_HOST'],
+        'port'     => $_ENV['DB_PORT'],
+        'database' => $_ENV['DB_DATABASE']
+    ]
+];
+$app    = new Application(
+    dirname(__DIR__), $config
+);
+
 $app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
