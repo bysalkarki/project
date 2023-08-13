@@ -2,32 +2,35 @@
 
 ?>
 <html lang="en">
-<style>
-    /* Custom styles for the hero banner */
-    .hero-banner {
-        background-image: url("https://source.unsplash.com/H4EyvkuBhHA");
-        background-size: cover;
-        background-position: center;
-        color: #fff;
-        padding: 150px 0;
-        text-align: center;
-    }
+<head>
+    <title><?= $_ENV['APP_NAME'] ?></title>
+    <style>
+        /* Custom styles for the hero banner */
+        .hero-banner {
+            height: 95vh;
+            background-image: url("https://source.unsplash.com/H4EyvkuBhHA");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 150px 0;
+            text-align: center;
+        }
 
-    .hero-banner h1 {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
-    }
+        .hero-banner h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
 
-    .hero-banner p {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
-    }
+        .hero-banner p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
 
-    .btn-primary {
-        background-color: #FF5733;
-        border-color: #FF5733;
-    }
-</style>
+        .btn-primary {
+            background-color: #FF5733;
+            border-color: #FF5733;
+        }
+    </style>
 </head>
 <header class="p-3 text-bg-dark">
     <div class="container">
@@ -54,6 +57,24 @@
     </div>
 </header>
 {{content}}
+<footer>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">© <?= date('Y') ?> <?= $_ENV['APP_NAME'] ?></span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+            </ul>
+        </footer>
+    </div>
+</footer>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
