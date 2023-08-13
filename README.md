@@ -11,7 +11,6 @@
     - [Installation](#installation)
 - [Usage](#usage)
 - [Database Schema](#database-schema)
-- [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
@@ -58,15 +57,6 @@ Follow these instructions to set up the Employee Management System on your local
 
 The database schema consists of several tables, including `employees`, `attendance`, `leave_requests`, `salaries`, and more. Refer to the provided SQL file for a detailed schema description.
 
-## Contributing
-
-We welcome contributions to enhance the Employee Management System. To contribute, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Make your changes and commit them: `git commit -m "Add a new feature"`
-4. Push to the branch: `git push origin feature/your-feature-name`
-5. Create a pull request detailing your changes.
 
 ## License
 
@@ -78,4 +68,4 @@ We extend our appreciation to the PHP and MySQL communities for providing robust
 
 ---
 
-For any questions or inquiries, feel free to contact us at project@example.com. We hope the Employee Management System proves to be a valuable asset for managing HR operations effectively!
+For any questions or inquiries, feel free to contact us at bishalkarki201@gmail.com We hope the Employee Management System proves to be a valuable asset for managing HR operations effectively!
