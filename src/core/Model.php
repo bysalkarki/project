@@ -27,7 +27,6 @@ abstract class Model
     {
         foreach ($this->rules() as $attribute => $rules) {
             $value = $this->{$attribute};
-
             foreach ($rules as $rule) {
                 $ruleName = $rule;
                 if (is_array($rule)) {
@@ -38,7 +37,7 @@ abstract class Model
                     $this->addError($attribute, self::RULE_REQUIRED);
                 }
 
-                if ($ruleName === self::RULE_EMAIL && filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                if ($ruleName === self::RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
                     $this->addError($attribute, self::RULE_EMAIL);
                 }
 
@@ -50,14 +49,14 @@ abstract class Model
                     $this->addError($attribute, self::RULE_MAX, $rule);
                 }
 
-                if ($ruleName === self::RULE_MATCH && $value != $rules[$rule['match']]) {
+                if ($ruleName === self::RULE_MATCH && $value != $this->{$rule['match']}) {
                     $this->addError($attribute, self::RULE_MATCH, $rule);
                 }
 
                 if ($ruleName === self::RULE_UNIQUE) {
-                    $className       = $rule['class'];
+                    $className = $rule['class'];
                     $uniqueAttribute = $rule['attribute'] ?? $attribute;
-                    $tableName       = $className::tableName();
+                    $tableName = $className::tableName();
 
                     $statement = Application::$app->db->prepare(
                         "SELECT * FROM $tableName WHERE $uniqueAttribute = :attr"
@@ -72,6 +71,7 @@ abstract class Model
                 }
             }
         }
+        return empty($this->errors);
     }
 
     abstract public function rules(): array;
@@ -106,6 +106,15 @@ abstract class Model
     public function getFirstError($attribute)
     {
         return $this->errors[$attribute][0] ?? false;
+    }
+
+    public function printErrorMessage($attribute)
+    {
+        if(!$this->hasErrors($attribute)){
+            return '';
+        }
+
+        return '<span class="text-danger">'.$this->getFirstError($attribute).'</span>';
     }
 
 

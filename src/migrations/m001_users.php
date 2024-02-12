@@ -4,7 +4,7 @@
 use app\core\Application;
 use app\core\Database;
 
-class m0001_users
+class m001_Users
 {
     public Database $database;
 
@@ -30,7 +30,7 @@ class m0001_users
 
     public function down(): void
     {
-        $sql = "DROP TABLE USERS";
+        $sql = "DROP TABLE users";
         $this->database->pdo->exec($sql);
     }
 }

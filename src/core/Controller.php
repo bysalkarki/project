@@ -5,6 +5,7 @@ namespace app\core;
 class Controller
 {
     public string $layout = 'main';
+    public array $middleware = [];
 
     public function render(string $view, array $params = [])
     {
@@ -14,6 +15,11 @@ class Controller
     public function setLayout(string $layout)
     {
         $this->layout = $layout;
+    }
+
+    public function registerMiddleware(BaseMiddleware $middleware)
+    {
+        $this->middleware[] = $middleware;
     }
 
 

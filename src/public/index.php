@@ -23,10 +23,13 @@ $app    = new Application(
 );
 
 $app->router->get('/', [SiteController::class, 'home']);
-$app->router->get('/contact', [SiteController::class, 'contact']);
-$app->router->post('/contact', [SiteController::class, 'handleContact']);
 $app->router->get('/login', [AuthController::class, 'login']);
+$app->router->get('/logout', [AuthController::class, 'logout']);
 $app->router->post('/login', [AuthController::class, 'handleLogin']);
 $app->router->post('/registration', [AuthController::class, 'handleRegister']);
 $app->router->get('/registration', [AuthController::class, 'registration']);
+
+$app->router->get('/department',[\app\controllers\DepartmentController::class,'index']);
+$app->router->get('/department-create',[\app\controllers\DepartmentController::class,'create']);
+$app->router->get('/department-edit',[\app\controllers\DepartmentController::class,'edit']);
 $app->run();

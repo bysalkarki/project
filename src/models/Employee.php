@@ -4,7 +4,7 @@ namespace app\models;
 
 use app\core\DbModel;
 
-class User extends DbModel
+class Employee extends DbModel
 {
     public const STATUS_ACTIVE = 1;
     public const STATUS_INACTIVE = 0;
@@ -15,45 +15,42 @@ class User extends DbModel
     public string $passwordConfirmation = '';
     public int $status = self::STATUS_INACTIVE;
 
-    public function register()
-    {
-        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        return $this->save();
-    }
-
 
     public function rules(): array
     {
         return [
             'name' => [self::RULE_REQUIRED],
+            'address' => [self::RULE_REQUIRED],
+            'position' => [self::RULE_REQUIRED],
+            'salary' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 1000]],
             'email' => [
                 self::RULE_REQUIRED,
                 self::RULE_EMAIL,
                 [
                     self::RULE_UNIQUE,
                     'class' => self::class,
-                    'attribute'=>'email',
+                    'attribute' => '',
                 ]
             ],
-            'password' => [self::RULE_REQUIRED],
-            'passwordConfirmation' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']],
         ];
     }
 
     public function tableName(): string
     {
-        return 'users';
+        return 'employees';
     }
 
     public function attributes(): array
     {
         return [
             'name',
+            'position',
             'email',
-            'password',
-            'status',
+            'address',
+            'salary',
         ];
     }
+
     public function primaryKey(): string
     {
         return 'id';

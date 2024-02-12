@@ -9,15 +9,16 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $config = [
+    'userClass' => \app\models\User::class,
     'db' => [
-        'user'     => $_ENV['DB_USER'],
+        'user' => $_ENV['DB_USER'],
         'password' => $_ENV['DB_PASSWORD'],
-        'host'     => $_ENV['DB_HOST'],
-        'port'     => $_ENV['DB_PORT'],
+        'host' => $_ENV['DB_HOST'],
+        'port' => $_ENV['DB_PORT'],
         'database' => $_ENV['DB_DATABASE']
     ]
 ];
-$app    = new Application(
+$app = new Application(
     __DIR__, $config
 );
 
