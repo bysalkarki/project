@@ -6,6 +6,7 @@ use app\core\DbModel;
 
 class Department extends DbModel
 {
+    public string $name = '';
 
     public function tableName(): string
     {

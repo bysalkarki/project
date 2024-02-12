@@ -2,34 +2,41 @@
 
 namespace app\controllers;
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
+use app\models\Department;
 
 class DepartmentController extends Controller
 {
+    public Department $department;
+
+    public function __construct()
+    {
+        $this->department = new Department();
+    }
 
     public function index()
     {
         $params = [
-            'name' => 'bishal karki'
+            'models' => $this->department->findAll(['1' => 1]),
+            'model' => $this->department
         ];
         return $this->render('department/index', $params);
     }
 
-    public function create()
+    public function store(Request $request)
     {
-        $params = [
-            'name' => 'bishal karki'
-        ];
-        return $this->render('home', $params);
-    }
+        $this->department->loadData($request->getBody());
 
-    public function store()
-    {
-        $params = [
-            'name' => 'bishal karki'
-        ];
-        return $this->render('home', $params);
+        if ($this->department->validate() && $this->department->save()) {
+            Application::$app->response->redirect('/department');
+        }
+
+        return $this->render('department/index', [
+            'models' => $this->department->findAll(['1' => 1]),
+            'model' => $this->department
+        ]);
     }
 
     public function edit()
@@ -48,12 +55,11 @@ class DepartmentController extends Controller
         return $this->render('home', $params);
     }
 
-    public function delete()
+    public function remove(Request $request)
     {
-        $params = [
-            'name' => 'bishal karki'
-        ];
-        return $this->render('home', $params);
+        $record = $request->getBody();
+        $this->department->deleteRecord($record['id']);
+        Application::$app->response->redirect('/department');
     }
 
 
