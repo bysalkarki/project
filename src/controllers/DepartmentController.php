@@ -39,20 +39,44 @@ class DepartmentController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
+        $requestId = $request->getBody();
+        if (empty($requestId['id'])) {
+            Application::$app->router->response->setStatusCode('404');
+            return Application::$app->router->renderContent('NOT FOUND');
+        }
+        $model = $this->department->findOne(['id' => $requestId['id']]);
+
+        if (!$model) {
+            Application::$app->router->response->setStatusCode('404');
+            return Application::$app->router->renderContent('NOT FOUND');
+        }
+
         $params = [
-            'name' => 'bishal karki'
+            'model' => $model
         ];
-        return $this->render('home', $params);
+
+        return $this->render('department/form', $params);
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        $params = [
-            'name' => 'bishal karki'
-        ];
-        return $this->render('home', $params);
+        $requestId = $request->getBody();
+        if (empty($requestId['id']) || empty($requestId['name'])) {
+            Application::$app->router->response->setStatusCode('404');
+            return Application::$app->router->renderContent('NOT FOUND');
+        }
+        $model = $this->department->findOne(['id' => $requestId['id']]);
+
+        if (!$model) {
+            Application::$app->router->response->setStatusCode('404');
+            return Application::$app->router->renderContent('NOT FOUND');
+        }
+        $model->name = $requestId['name'];
+
+        $model->update();
+        Application::$app->response->redirect('/department');
     }
 
     public function remove(Request $request)

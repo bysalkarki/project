@@ -24,11 +24,17 @@
                     <use xlink:href="#bootstrap"></use>
                 </svg>
             </a>
-
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/department" class="nav-link px-2 text-secondary">Department</a></li>
-                <li><a href="/employee" class="nav-link px-2 text-secondary">Employee</a></li>
+
+                <?php
+                if (!\app\core\Application::isGuest()): ?>
+                    <li><a href="/department" class="nav-link px-2 text-secondary">Department</a></li>
+                    <li><a href="/employee" class="nav-link px-2 text-secondary">Employee</a></li>
+                <?php
+
+                endif; ?>
             </ul>
+
             <?php
             if (\app\core\Application::isGuest()): ?>
                 <div class="text-end">
@@ -46,7 +52,6 @@
     </div>
 </header>
 {{content}}
-
 
 
 </html>

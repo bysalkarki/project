@@ -51,7 +51,7 @@ class Router
      * @param string $content
      * @return string
      */
-    private function renderContent(string $content): string
+    public function renderContent(string $content): string
     {
         $layout = $this->layoutContent();
         return str_replace("{{content}}", $content, $layout);

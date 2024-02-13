@@ -30,6 +30,8 @@ $app->router->post('/registration', [AuthController::class, 'handleRegister']);
 $app->router->get('/registration', [AuthController::class, 'registration']);
 
 $app->router->get('/department',[\app\controllers\DepartmentController::class,'index']);
+$app->router->get('/department-update',[\app\controllers\DepartmentController::class,'edit']);
+$app->router->post('/department-update',[\app\controllers\DepartmentController::class,'update']);
 $app->router->post('/department',[\app\controllers\DepartmentController::class,'store']);
 $app->router->post('/department/delete',[\app\controllers\DepartmentController::class,'remove']);
 $app->run();

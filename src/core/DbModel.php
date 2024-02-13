@@ -29,6 +29,39 @@ abstract class DbModel extends Model
         }
     }
 
+    public function update(): bool
+    {
+        try {
+            $tableName = $this->tableName();
+            $primaryKey = $this->primaryKey(); // Assuming primaryKey() method returns the primary key column name
+            $primaryKeyValue = $this->{$primaryKey};
+            $setClause = implode(',', array_map(fn($attr) => "$attr = :$attr", $this->attributes()));
+
+            // Construct the SQL UPDATE statement
+            $sql = "UPDATE $tableName SET $setClause WHERE $primaryKey = :$primaryKey";
+
+            // Prepare the SQL statement
+            $statement = self::prepare($sql);
+
+            // Bind parameters for update
+            foreach ($this->attributes() as $attribute) {
+                $statement->bindValue(":$attribute", $this->{$attribute});
+            }
+
+            // Bind primary key value
+            $statement->bindValue(":$primaryKey", $primaryKeyValue);
+
+            // Execute the statement
+            $statement->execute();
+
+            return true;
+        } catch (Exception $exception) {
+            print_r($exception->getMessage());
+            return false;
+        }
+    }
+
+
     abstract public function tableName(): string;
 
     abstract public function attributes(): array;

@@ -19,7 +19,7 @@
                       <td><?= $department->name ?></td>
                       <td><?= $department->created_at ?></td>
                       <td>
-                          <button class="btn btn-primary">Edit</button>
+                          <a type="button" href="/department-update?id=<?= $department->id ?>" class="btn btn-primary">Edit</a>
                           <form action="/department/delete" method="post">
                               <input type="hidden" name="id" value="<?= $department->id ?>">
                               <button class="btn btn-danger" type="submit">Delete</button>
