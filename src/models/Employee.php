@@ -6,14 +6,11 @@ use app\core\DbModel;
 
 class Employee extends DbModel
 {
-    public const STATUS_ACTIVE = 1;
-    public const STATUS_INACTIVE = 0;
-    public const STATUS_DELETED = 2;
     public string $name = '';
     public string $email = '';
-    public string $password = '';
-    public string $passwordConfirmation = '';
-    public int $status = self::STATUS_INACTIVE;
+    public string $salary = '';
+    public string $position = '';
+    public string $address = '';
 
 
     public function rules(): array
@@ -22,20 +19,15 @@ class Employee extends DbModel
             'name' => [self::RULE_REQUIRED],
             'address' => [self::RULE_REQUIRED],
             'position' => [self::RULE_REQUIRED],
-            'salary' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 1000]],
+            'salary' => [self::RULE_REQUIRED],
             'email' => [
                 self::RULE_REQUIRED,
                 self::RULE_EMAIL,
-                [
-                    self::RULE_UNIQUE,
-                    'class' => self::class,
-                    'attribute' => '',
-                ]
             ],
         ];
     }
 
-    public function tableName(): string
+    public static function tableName(): string
     {
         return 'employees';
     }

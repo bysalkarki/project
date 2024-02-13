@@ -8,7 +8,7 @@ class Department extends DbModel
 {
     public string $name = '';
 
-    public function tableName(): string
+    public static function tableName(): string
     {
         return 'department';
     }

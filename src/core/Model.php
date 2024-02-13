@@ -57,7 +57,6 @@ abstract class Model
                     $className = $rule['class'];
                     $uniqueAttribute = $rule['attribute'] ?? $attribute;
                     $tableName = $className::tableName();
-
                     $statement = Application::$app->db->prepare(
                         "SELECT * FROM $tableName WHERE $uniqueAttribute = :attr"
                     );

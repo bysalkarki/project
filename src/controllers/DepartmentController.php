@@ -75,8 +75,15 @@ class DepartmentController extends Controller
         }
         $model->name = $requestId['name'];
 
-        $model->update();
-        Application::$app->response->redirect('/department');
+        if ($model->validate() && $model->update()) {
+            Application::$app->response->redirect('/department');
+        }
+
+        $params = [
+            'model' => $model
+        ];
+
+        return $this->render('department/form', $params);
     }
 
     public function remove(Request $request)

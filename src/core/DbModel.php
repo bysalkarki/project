@@ -62,7 +62,7 @@ abstract class DbModel extends Model
     }
 
 
-    abstract public function tableName(): string;
+    abstract public static function tableName(): string;
 
     abstract public function attributes(): array;
 
@@ -86,9 +86,10 @@ abstract class DbModel extends Model
     }
 
     public function deleteRecord($id): bool
-    {;
+    {
+        ;
         try {
-            $tableName = $this->tableName();
+            $tableName = static::tableName();
             $sql = "DELETE FROM {$tableName} where id = '{$id}'";
 
             $statement = self::prepare($sql);
@@ -105,7 +106,7 @@ abstract class DbModel extends Model
      */
     public function getPrepare($where): PDOStatement|bool
     {
-        $tableName = $this->tableName();
+        $tableName = static::tableName();
         $attributes = array_keys($where);
         $sql = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
         $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
