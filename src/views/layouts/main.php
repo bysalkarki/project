@@ -47,7 +47,7 @@
             <?php
             else: ?>
                 <div class="text-end">
-                    <a type="button" class="btn btn-outline-light me-2" href="/logout">Logout</a>
+                    <a type="button" class="btn btn-outline-light me-2" href="/logout"> Logout</a>
                 </div>
             <?php
             endif; ?>

@@ -54,7 +54,17 @@ class Router
     public function renderContent(string $content): string
     {
         $layout = $this->layoutContent();
-        return str_replace("{{content}}", $content, $layout);
+
+        $output = <<< Start
+            <main class="px-3">
+                <h1>$content</h1>
+                 <p class="lead">
+                    <a href="/" class="btn btn-lg btn-light fw-bold border-white bg-white">Go To Home</a>
+                </p>
+            </main>
+    Start;
+
+        return str_replace("{{content}}", $output, $layout);
     }
 
     protected function layoutContent(): bool|string
