@@ -29,12 +29,15 @@
                     <td><?= $employee->address ?></td>
                     <td><?= $employee->created_at ?></td>
                     <td>
-                        <a type="button" href="/employee-update?id=<?= $employee->id ?>"
-                           class="btn btn-primary">Edit</a>
-                        <form action="/employee/delete" method="post">
-                            <input type="hidden" name="id" value="<?= $employee->id ?>">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
+                        <div class="d-flex align-item-center">
+                            <a type="button" href="/employee-update?id=<?= $employee->id ?>"
+                               class="btn btn-primary btn-sm h-100">Edit</a>
+                            <form action="/employee/delete" method="post">
+                                <input type="hidden" name="id" value="<?= $employee->id ?>">
+                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                            </form>
+                        </div>
+
                     </td>
                 </tr>
                 <?php

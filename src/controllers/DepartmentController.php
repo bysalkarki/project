@@ -18,6 +18,11 @@ class DepartmentController extends Controller
 
     public function index()
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $params = [
             'models' => $this->department->findAll(['1' => 1]),
             'model' => $this->department
@@ -27,6 +32,11 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $this->department->loadData($request->getBody());
 
         if ($this->department->validate() && $this->department->save()) {
@@ -41,6 +51,11 @@ class DepartmentController extends Controller
 
     public function edit(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $requestId = $request->getBody();
         if (empty($requestId['id'])) {
             Application::$app->router->response->setStatusCode('404');
@@ -62,6 +77,11 @@ class DepartmentController extends Controller
 
     public function update(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $requestId = $request->getBody();
         if (empty($requestId['id']) || empty($requestId['name'])) {
             Application::$app->router->response->setStatusCode('404');
@@ -88,6 +108,11 @@ class DepartmentController extends Controller
 
     public function remove(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $record = $request->getBody();
         $this->department->deleteRecord($record['id']);
         Application::$app->response->redirect('/department');

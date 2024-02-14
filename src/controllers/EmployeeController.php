@@ -19,6 +19,11 @@ class EmployeeController extends Controller
 
     public function index()
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $params = [
             'models' => $this->employee->findAll(['1' => 1]),
             'model' => $this->employee
@@ -36,6 +41,11 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $this->employee->loadData($request->getBody());
 
         if ($this->employee->validate() && $this->employee->save()) {
@@ -49,6 +59,11 @@ class EmployeeController extends Controller
 
     public function edit(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $requestId = $request->getBody();
         if (empty($requestId['id'])) {
             Application::$app->router->response->setStatusCode('404');
@@ -70,6 +85,11 @@ class EmployeeController extends Controller
 
     public function update(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $requestId = $request->getBody();
         if (empty($requestId['id'])) {
             Application::$app->router->response->setStatusCode('404');
@@ -95,11 +115,16 @@ class EmployeeController extends Controller
             'model' => $model
         ];
 
-        return $this->render('employee/form', $params);
+        return $this->render('employee/edit', $params);
     }
 
     public function remove(Request $request)
     {
+        if (Application::isGuest()) {
+            Application::$app->router->response->setStatusCode('401');
+            return Application::$app->router->renderContent('UNAUTHORIZED');
+        }
+
         $record = $request->getBody();
         $this->employee->deleteRecord($record['id']);
         Application::$app->response->redirect('/employee');

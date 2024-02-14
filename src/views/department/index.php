@@ -19,11 +19,13 @@
                       <td><?= $department->name ?></td>
                       <td><?= $department->created_at ?></td>
                       <td>
-                          <a type="button" href="/department-update?id=<?= $department->id ?>" class="btn btn-primary">Edit</a>
-                          <form action="/department/delete" method="post">
-                              <input type="hidden" name="id" value="<?= $department->id ?>">
-                              <button class="btn btn-danger" type="submit">Delete</button>
-                          </form>
+                          <div class="d-flex align-item-center">
+                              <a href="/department-update?id=<?= $department->id ?>" class="btn btn-primary btn-sm h-100">Edit</a>
+                              <form action="/department/delete" method="post" class="h-100">
+                                  <input type="hidden" name="id" value="<?= $department->id ?>">
+                                  <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                              </form>
+                          </div>
                       </td>
                   </tr>
                   <?php
