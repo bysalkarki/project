@@ -30,6 +30,7 @@
 
                 <?php
                 if (!\app\core\Application::isGuest()): ?>
+                    <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                     <li><a href="/department" class="nav-link px-2 text-secondary">Department</a></li>
                     <li><a href="/employee" class="nav-link px-2 text-secondary">Employee</a></li>
                 <?php
@@ -53,7 +54,12 @@
         </div>
     </div>
 </header>
-{{content}}
+<body>
+<div class="container-fluid pt-4">
+    {{content}}
+</div>
+</body>
+
 
 
 </html>

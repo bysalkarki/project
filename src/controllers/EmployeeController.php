@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
+use app\models\Department;
 use app\models\Employee;
 
 class EmployeeController extends Controller
@@ -28,13 +29,15 @@ class EmployeeController extends Controller
             'models' => $this->employee->findAll(['1' => 1]),
             'model' => $this->employee
         ];
+
         return $this->render('employee/index', $params);
     }
 
     public function create()
     {
         $params = [
-            'model' => $this->employee
+            'model' => $this->employee,
+            'department' => (new Department())->findAll(['1' => 1])
         ];
         return $this->render('employee/create', $params);
     }
@@ -77,7 +80,8 @@ class EmployeeController extends Controller
         }
 
         $params = [
-            'model' => $model
+            'model' => $model,
+            'department' => (new Department())->findAll(['1' => 1])
         ];
 
         return $this->render('employee/edit', $params);

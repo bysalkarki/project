@@ -8,9 +8,10 @@ class Employee extends DbModel
 {
     public string $name = '';
     public string $email = '';
-    public string $salary = '';
+    public int $salary = 0;
     public string $position = '';
     public string $address = '';
+    public int $department_id = 0;
 
 
     public function rules(): array
@@ -24,6 +25,7 @@ class Employee extends DbModel
                 self::RULE_REQUIRED,
                 self::RULE_EMAIL,
             ],
+            'department_id' => [self::RULE_REQUIRED]
         ];
     }
 
@@ -40,6 +42,7 @@ class Employee extends DbModel
             'email',
             'address',
             'salary',
+            'department_id'
         ];
     }
 
@@ -47,4 +50,5 @@ class Employee extends DbModel
     {
         return 'id';
     }
+
 }

@@ -3,7 +3,7 @@
 use app\core\Application;
 use app\core\Database;
 
-class m002_employee
+class m003_employee
 {
     public Database $database;
 
@@ -22,7 +22,9 @@ class m002_employee
            email varchar(255) NOT NULL,
            address varchar(255) NOT NULL,
            salary int NOT NULL DEFAULT 0,
-           created_at TIMESTAMP DEFAULT  CURRENT_TIMESTAMP
+           created_at TIMESTAMP DEFAULT  CURRENT_TIMESTAMP,
+            department_id INT,
+            FOREIGN KEY (department_id) REFERENCES department(id)
        ) ENGINE=INNODB;
        ";
         $this->database->pdo->exec($sql);

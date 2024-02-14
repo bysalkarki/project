@@ -37,6 +37,17 @@
                    value="<?= $model->address ?>">
             <?= $model->printErrorMessage('address') ?>
         </div>
+
+        <div class="mb-3">
+            <label for="department_id" class="department_id">Department Id</label>
+            <select class="form-select" aria-label="Default select example" name="department_id">
+                <?php
+                foreach ($department as $dep): ?>
+                    <option value="<?= $dep->id ?>" <?= $dep->id == $model->department_id ? 'selected' : '' ?>><?= $dep->name ?></option>
+                <?php
+                endforeach; ?>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

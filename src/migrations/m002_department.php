@@ -3,7 +3,7 @@
 use app\core\Application;
 use app\core\Database;
 
-class m003_department
+class m002_department
 {
     public Database $database;
 

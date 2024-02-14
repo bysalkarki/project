@@ -2,8 +2,6 @@
 
 ?>
 
-<H1>Dashboard</H1>
-
 <?php
 
 use app\core\Application;
@@ -16,7 +14,7 @@ if (!Application::isGuest()):
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">Employee Recruitment</div>
+                        <div class="card-title">Application Data</div>
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
@@ -30,10 +28,10 @@ if (!Application::isGuest()):
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Employee', 'Users', 'Department'],
+                labels: ['Users', 'Department','Employee'],
                 datasets: [{
                     label: 'Total Counts',
-                    data: [12, 19, 3],
+                    data: <?= $data ?>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -57,4 +55,8 @@ if (!Application::isGuest()):
         });
     </script>
 <?php
-endif; ?>
+else: ?>
+<div class="container">
+    Please login to view data
+</div>
+<?php endif; ?>
