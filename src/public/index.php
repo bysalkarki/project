@@ -41,4 +41,7 @@ $app->router->post('/employee-update', [\app\controllers\EmployeeController::cla
 $app->router->get('/employee/create', [\app\controllers\EmployeeController::class, 'create']);
 $app->router->post('/employee', [\app\controllers\EmployeeController::class, 'store']);
 $app->router->post('/employee/delete', [\app\controllers\EmployeeController::class, 'remove']);
+
+$app->router->get('/attendance', [\app\controllers\AttendanceController::class, 'index']);
+$app->router->post('/attendance', [\app\controllers\AttendanceController::class, 'create']);
 $app->run();

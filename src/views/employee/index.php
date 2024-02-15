@@ -32,9 +32,14 @@
                         <div class="d-flex align-item-center">
                             <a type="button" href="/employee-update?id=<?= $employee->id ?>"
                                class="btn btn-primary btn-sm h-100">Edit</a>
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-id="<?= $employee->id ?>">
+
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" data-bs-id="<?= $employee->id ?>">
                                 Delete
                             </button>
+
+                            <a type="button" href="/attendance?employee_id=<?= $employee->id ?>"
+                               class="btn btn-warning btn-sm h-100">Attendance</a>
                         </div>
 
                     </td>

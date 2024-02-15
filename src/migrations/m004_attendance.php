@@ -18,6 +18,8 @@ class m004_attendance
                CREATE TABLE attendance (
             id INT AUTO_INCREMENT PRIMARY KEY,
             employee_id INT,
+            attendance_date DATE,
+            status TINYINT DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (employee_id) REFERENCES employees(id)
         ) ENGINE=INNODB;
